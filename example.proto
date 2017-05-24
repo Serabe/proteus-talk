@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package gomad;
+
+message Gadget {
+    string name = 1;
+    repeated BodyPosition body_positions = 2;
+}
+
+enum BodyPosition {
+    option allow_alias = true;
+    HEAD = 0;
+    CABEZA = 0;
+    CHEST = 1;
+    TRONCO = 1;
+    LEFT_ARM = 2;
+    LEFT_LEG = 3;
+    RIGHT_ARM = 4;
+    RIGHT_LEG = 5;
+}
+
+

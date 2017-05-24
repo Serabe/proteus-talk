@@ -1,0 +1,58 @@
+syntax = "proto3";
+package github.com.Serabe.proteustalk;
+
+import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+
+option (gogoproto.protosizer_all) = true;
+option (gogoproto.sizer_all) = false;
+option go_package = "gomad";
+
+message IngredientSelection {
+	option (gogoproto.goproto_getters) = false;
+	option (gogoproto.typedecl) = false;
+	github.com.Serabe.proteustalk.Ingredient ingredient = 1;
+	int32 portions = 2;
+}
+
+message Pizza {
+	option (gogoproto.goproto_getters) = false;
+	option (gogoproto.typedecl) = false;
+	int32 id = 1 [(gogoproto.customname) = "ID"];
+	repeated github.com.Serabe.proteustalk.IngredientSelection ingredients = 2;
+}
+
+message AddIngredientRequest {
+	github.com.Serabe.proteustalk.Pizza arg1 = 1;
+	github.com.Serabe.proteustalk.Ingredient arg2 = 2;
+	int32 arg3 = 3;
+}
+
+message NutritionalReportResponse {
+	string result1 = 1;
+}
+
+message RemoveIngredientRequest {
+	github.com.Serabe.proteustalk.Pizza arg1 = 1;
+	github.com.Serabe.proteustalk.Ingredient arg2 = 2;
+	int32 arg3 = 3;
+}
+
+enum Ingredient {
+	option (gogoproto.enumdecl) = false;
+	option (gogoproto.goproto_enum_prefix) = false;
+	option (gogoproto.goproto_enum_stringer) = false;
+	PEPPERONI = 0 [(gogoproto.enumvalue_customname) = "Pepperoni"];
+	PINEAPPLE = 1 [(gogoproto.enumvalue_customname) = "Pineapple"];
+	HAM = 2 [(gogoproto.enumvalue_customname) = "Ham"];
+	BACON = 3 [(gogoproto.enumvalue_customname) = "Bacon"];
+	CHICKEN = 4 [(gogoproto.enumvalue_customname) = "Chicken"];
+	LAMB = 5 [(gogoproto.enumvalue_customname) = "Lamb"];
+	NO_FOOD = 6 [(gogoproto.enumvalue_customname) = "NoFood"];
+}
+
+service ProteustalkService {
+	rpc AddIngredient (github.com.Serabe.proteustalk.AddIngredientRequest) returns (github.com.Serabe.proteustalk.Pizza);
+	rpc NutritionalReport (github.com.Serabe.proteustalk.Pizza) returns (github.com.Serabe.proteustalk.NutritionalReportResponse);
+	rpc RemoveIngredient (github.com.Serabe.proteustalk.RemoveIngredientRequest) returns (github.com.Serabe.proteustalk.Pizza);
+}
+
